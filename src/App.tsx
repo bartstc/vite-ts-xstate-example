@@ -8,17 +8,18 @@ import "./App.css";
 function App() {
   const [
     {
-      value,
       context: { pageCount, pokemonList, selectedPokemon },
+      matches,
     },
     send,
   ] = useMachine(pokemonViewerMachine);
-  const error = value === "showError";
 
   return (
     <div className="app">
-      {error && <div>We encountered an error. Please try again later.</div>}
-      {!error && (
+      {matches("Error") && (
+        <div>We encountered an error. Please try again later.</div>
+      )}
+      {!matches("Error") && (
         <div className="container">
           <div>
             <PokemonList
